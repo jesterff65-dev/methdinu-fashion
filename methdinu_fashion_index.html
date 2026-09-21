@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>METHDINU FASHION | Clothing Store</title>
+<meta name="description" content="WHITE PC clothing store - shirts, t-shirts, pants, shoes and accessories.">
+<style>
+:root{--black:#090909;--dark:#111;--light:#f6f6f4;--gray:#777;--line:#ddd;--green:#25d366}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--light);color:#111}
+header{position:sticky;top:0;z-index:50;background:rgba(9,9,9,.96);color:#fff;border-bottom:1px solid #222}
+.nav{max-width:1200px;margin:auto;padding:17px 22px;display:flex;align-items:center;gap:25px}
+.logo{font-size:25px;font-weight:900;letter-spacing:3px;white-space:nowrap}
+.logo span{font-weight:400;color:#aaa}
+nav{display:flex;gap:24px;margin-left:auto}
+nav a{color:#fff;text-decoration:none;font-size:14px}
+nav a:hover{color:#bbb}
+.cart-btn{background:#fff;color:#111;border:0;border-radius:7px;padding:10px 14px;font-weight:800;cursor:pointer}
+.hero{min-height:570px;background:#fff;display:grid;grid-template-columns:1fr 1fr;align-items:center;overflow:hidden}
+.hero-text{padding:80px max(25px,7vw)}
+.kicker{font-size:12px;letter-spacing:3px;color:#777;margin-bottom:18px}
+.hero h1{font-size:clamp(48px,7vw,86px);line-height:.9;letter-spacing:-4px;margin-bottom:25px}
+.hero p{color:#666;line-height:1.6;max-width:470px}
+.hero-btn{display:inline-block;margin-top:28px;background:#111;color:#fff;text-decoration:none;padding:14px 24px;border-radius:6px;font-weight:800}
+.hero-image{height:570px;background:linear-gradient(145deg,#ddd,#888);display:flex;align-items:center;justify-content:center;font-size:150px}
+.section{max-width:1200px;margin:auto;padding:70px 22px}
+.section-title{text-align:center;margin-bottom:38px}
+.section-title h2{font-size:34px;margin-bottom:8px}
+.section-title p{color:var(--gray)}
+.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.category{height:180px;background:#fff;border:1px solid var(--line);display:flex;align-items:end;padding:22px;border-radius:10px;text-decoration:none;color:#111;font-size:21px;font-weight:800}
+.category:nth-child(1){background:linear-gradient(#ffffff55,#fff),#ddd}
+.category:nth-child(2){background:linear-gradient(#ffffff55,#fff),#cfcfcf}
+.category:nth-child(3){background:linear-gradient(#ffffff55,#fff),#aaa}
+.category:nth-child(4){background:linear-gradient(#ffffff55,#fff),#bbb}
+.filters{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-bottom:28px}
+.filter{border:1px solid #bbb;background:#fff;padding:9px 16px;border-radius:20px;cursor:pointer}
+.filter.active,.filter:hover{background:#111;color:#fff;border-color:#111}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.product{background:#fff;border-radius:10px;overflow:hidden;border:1px solid #e2e2e2}
+.product-img{height:300px;background:#e8e8e8;display:flex;align-items:center;justify-content:center;font-size:80px}
+.product-info{padding:17px}
+.product-info h3{font-size:16px;margin-bottom:8px}
+.meta{color:#777;font-size:13px;margin-bottom:10px}
+.price{font-weight:900;font-size:18px;margin-bottom:13px}
+select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:9px;background:#fff}
+.order{width:100%;padding:11px;border:0;border-radius:6px;background:var(--green);color:#fff;font-weight:800;cursor:pointer}
+.about{background:#111;color:#fff}
+.about-inner{max-width:800px;margin:auto;text-align:center}
+.about p{color:#bbb;line-height:1.7;margin-top:12px}
+footer{background:#050505;color:#aaa;text-align:center;padding:30px 20px;font-size:13px}
+#cartPanel{position:fixed;right:-420px;top:0;width:min(390px,100%);height:100vh;background:#fff;z-index:100;box-shadow:-8px 0 30px #0003;padding:25px;transition:.25s;overflow:auto}
+#cartPanel.open{right:0}
+.cart-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.close{border:0;background:#eee;border-radius:50%;width:35px;height:35px;cursor:pointer}
+.cart-item{border-bottom:1px solid #ddd;padding:13px 0}
+.cart-total{font-size:20px;font-weight:900;margin:20px 0}
+.checkout{width:100%;padding:13px;border:0;border-radius:7px;background:var(--green);color:#fff;font-weight:900;cursor:pointer}
+.empty{color:#777;text-align:center;padding:30px 0}
+@media(max-width:850px){.hero{grid-template-columns:1fr}.hero-image{height:330px}.categories,.products{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){nav{display:none}.categories,.products{grid-template-columns:1fr}.hero h1{letter-spacing:-2px}.section{padding:50px 15px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="nav">
+<div class="logo">METHDINU <span>FASHION</span></div>
+<nav>
+<a href="#home">Home</a>
+<a href="#categories">Categories</a>
+<a href="#shop">Shop</a>
+<a href="#about">About</a>
+</nav>
+<button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cartCount">0</span>)</button>
+</div>
+</header>
+
+<main>
+<section class="hero" id="home">
+<div class="hero-text">
+<div class="kicker">METHDINU FASHION</div>
+<h1>WEAR<br>YOUR<br>STYLE.</h1>
+<p>Modern everyday fashion — shirts, T-shirts, pants, shoes and accessories.</p>
+<a class="hero-btn" href="#shop">SHOP COLLECTION</a>
+</div>
+<div class="hero-image">👕</div>
+</section>
+
+<section class="section" id="categories">
+<div class="section-title">
+<h2>Shop by Category</h2>
+<p>Find something for your style.</p>
+</div>
+<div class="categories">
+<a class="category" href="#shop" onclick="setFilter('shirts')">👕 Shirts</a>
+<a class="category" href="#shop" onclick="setFilter('pants')">👖 Pants</a>
+<a class="category" href="#shop" onclick="setFilter('shoes')">👟 Shoes</a>
+<a class="category" href="#shop" onclick="setFilter('accessories')">🧢 Accessories</a>
+</div>
+</section>
+
+<section class="section" id="shop">
+<div class="section-title">
+<h2>New Collection</h2>
+<p>Choose your item and size, then order through WhatsApp.</p>
+</div>
+<div class="filters">
+<button class="filter active" onclick="setFilter('all',this)">All</button>
+<button class="filter" onclick="setFilter('shirts',this)">Shirts</button>
+<button class="filter" onclick="setFilter('pants',this)">Pants</button>
+<button class="filter" onclick="setFilter('shoes',this)">Shoes</button>
+<button class="filter" onclick="setFilter('accessories',this)">Accessories</button>
+</div>
+
+<div class="products">
+
+<div class="product" data-cat="shirts">
+<div class="product-img">👕</div>
+<div class="product-info">
+<h3>Classic White T-Shirt</h3><div class="meta">Premium cotton</div>
+<div class="price">Rs. 4,500</div>
+<select id="size1"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+<button class="order" onclick="addCart('Classic White T-Shirt',4500,'size1')">ADD TO CART</button>
+</div></div>
+
+<div class="product" data-cat="shirts">
+<div class="product-img">👔</div>
+<div class="product-info">
+<h3>Urban Black Shirt</h3><div class="meta">Regular fit</div>
+<div class="price">Rs. 5,900</div>
+<select id="size2"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+<button class="order" onclick="addCart('Urban Black Shirt',5900,'size2')">ADD TO CART</button>
+</div></div>
+
+<div class="product" data-cat="pants">
+<div class="product-img">👖</div>
+<div class="product-info">
+<h3>Street Cargo Pants</h3><div class="meta">Relaxed fit</div>
+<div class="price">Rs. 6,900</div>
+<select id="size3"><option>28</option><option>30</option><option>32</option><option>34</option><option>36</option></select>
+<button class="order" onclick="addCart('Street Cargo Pants',6900,'size3')">ADD TO CART</button>
+</div></div>
+
+<div class="product" data-cat="shoes">
+<div class="product-img">👟</div>
+<div class="product-info">
+<h3>Daily Street Shoes</h3><div class="meta">Everyday style</div>
+<div class="price">Rs. 9,900</div>
+<select id="size4"><option>39</option><option>40</option><option>41</option><option>42</option><option>43</option><option>44</option></select>
+<button class="order" onclick="addCart('Daily Street Shoes',9900,'size4')">ADD TO CART</button>
+</div></div>
+
+<div class="product" data-cat="accessories">
+<div class="product-img">🧢</div>
+<div class="product-info">
+<h3>METHDINU FASHION Cap</h3><div class="meta">Adjustable</div>
+<div class="price">Rs. 2,500</div>
+<select id="size5"><option>One Size</option></select>
+<button class="order" onclick="addCart('METHDINU FASHION Cap',2500,'size5')">ADD TO CART</button>
+</div></div>
+
+<div class="product" data-cat="accessories">
+<div class="product-img">🕶️</div>
+<div class="product-info">
+<h3>Urban Sunglasses</h3><div class="meta">Classic frame</div>
+<div class="price">Rs. 3,500</div>
+<select id="size6"><option>One Size</option></select>
+<button class="order" onclick="addCart('Urban Sunglasses',3500,'size6')">ADD TO CART</button>
+</div></div>
+
+<div class="product" data-cat="shirts">
+<div class="product-img">👕</div>
+<div class="product-info">
+<h3>Oversized Graphic Tee</h3><div class="meta">Oversized fit</div>
+<div class="price">Rs. 5,200</div>
+<select id="size7"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+<button class="order" onclick="addCart('Oversized Graphic Tee',5200,'size7')">ADD TO CART</button>
+</div></div>
+
+<div class="product" data-cat="pants">
+<div class="product-img">🩳</div>
+<div class="product-info">
+<h3>Casual Shorts</h3><div class="meta">Lightweight</div>
+<div class="price">Rs. 4,200</div>
+<select id="size8"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+<button class="order" onclick="addCart('Casual Shorts',4200,'size8')">ADD TO CART</button>
+</div></div>
+
+</div>
+</section>
+
+<section class="about" id="about">
+<div class="section about-inner">
+<h2>ABOUT METHDINU FASHION</h2>
+<p>METHDINU FASHION is a modern clothing-store prototype. Replace the sample products, prices and emoji images with your real inventory before publishing.</p>
+</div>
+</section>
+</main>
+
+<footer>METHDINU FASHION © 2026 • Clothing Store</footer>
+
+<div id="cartPanel">
+<div class="cart-head"><h2>Your Cart</h2><button class="close" onclick="toggleCart()">✕</button></div>
+<div id="cartItems"><div class="empty">Your cart is empty.</div></div>
+<div class="cart-total">Total: Rs. <span id="cartTotal">0</span></div>
+<button class="checkout" onclick="whatsappOrder()">ORDER ALL ON WHATSAPP</button>
+</div>
+
+<script>
+const WHATSAPP_NUMBER="947XXXXXXXX"; // Replace with your WhatsApp number
+let cart=[];
+
+function setFilter(cat,button){
+ document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));
+ if(button) button.classList.add('active');
+ document.querySelectorAll('.product').forEach(p=>{
+   p.style.display=(cat==='all'||p.dataset.cat===cat)?'block':'none';
+ });
+}
+function addCart(name,price,sizeId){
+ const size=document.getElementById(sizeId).value;
+ cart.push({name,price,size});
+ updateCart();
+ toggleCart(true);
+}
+function updateCart(){
+ document.getElementById('cartCount').textContent=cart.length;
+ const box=document.getElementById('cartItems');
+ if(!cart.length){box.innerHTML='<div class="empty">Your cart is empty.</div>';document.getElementById('cartTotal').textContent='0';return;}
+ box.innerHTML=cart.map((x,i)=>`<div class="cart-item"><b>${x.name}</b><br>Size: ${x.size}<br>Rs. ${x.price.toLocaleString()} <button onclick="removeItem(${i})" style="float:right;border:0;background:#eee;padding:4px 7px;border-radius:4px;cursor:pointer">Remove</button></div>`).join('');
+ document.getElementById('cartTotal').textContent=cart.reduce((s,x)=>s+x.price,0).toLocaleString();
+}
+function removeItem(i){cart.splice(i,1);updateCart();}
+function toggleCart(force){
+ const panel=document.getElementById('cartPanel');
+ if(force===true)panel.classList.add('open'); else panel.classList.toggle('open');
+}
+function whatsappOrder(){
+ if(!cart.length){alert('Your cart is empty.');return;}
+ if(WHATSAPP_NUMBER.includes('X')){alert('Please add your WhatsApp number in the code first.');return;}
+ let msg='Hello METHDINU FASHION! I want to place an order:%0A%0A';
+ cart.forEach((x,i)=>msg+=(i+1)+'. '+x.name+'%0A   Size: '+x.size+'%0A   Price: Rs. '+x.price.toLocaleString()+'%0A');
+ msg+='%0ATotal: Rs. '+cart.reduce((s,x)=>s+x.price,0).toLocaleString();
+ window.open('https://wa.me/'+WHATSAPP_NUMBER+'?text='+msg,'_blank');
+}
+</script>
+</body>
+</html>
